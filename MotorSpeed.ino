@@ -1,4 +1,4 @@
-nt a=-1,b=-1,flag=0,rev=0,diff=0;
+int a=-1,b=-1,flag=0,rev=0,diff=0;
 long start=0,flip=0;
 int ba=0,bb=0;
 void setup() 
