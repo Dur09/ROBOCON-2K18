@@ -176,22 +176,24 @@ global current
 current='a'
 global meta_front,meta_back,meta_left,meta_right
 global meta2_front,meta2_back,meta2_left,meta2_right
+global mch,mcv
 meta2_front=""
 meta2_back=""
 meta2_left=""
 meta2_right=""
-f=open("sensor.txt","r")
+f=open("sensor.txt")
 
 
 global sensorf,sensorb,sensorl,sensorr
 
-for i in range(0,10):
+for i in range(0,22):
     flag=0
     
     front=f.readline().split()
     back=f.readline().split()
     left=f.readline().split()
     right=f.readline().split()
+    blank=f.readline().split()
 
     front_int=convert(front)
     back_int=convert(back)
@@ -202,6 +204,9 @@ for i in range(0,10):
     scoreb=getscore(back_int)
     scorel=getscore(left_int)
     scorer=getscore(right_int)
+
+    #print front_int,back_int,left_int,right_int
+    #print scoref,scoreb,scorer,scorel
 
     if current!=0 and len(current)==1:
         if (scoref):
@@ -234,13 +239,15 @@ for i in range(0,10):
                 meta_right=="back"
         if meta_front==meta_back:
             mcv=meta_front
-        elif scoref!=scoreb:
+        elif meta_front!=meta_back:
             mcv="error"
         if meta_left==meta_right:
             mch=meta_left
-        elif scorel!=scorer:
+        elif meta_left!=meta_right:
             mch="error"
-        print meta_front,meta_back,meta_left,meta_right
+        #print meta_front,meta_back,meta_left,meta_right,mch,mcv
+        
+        print scorel,scorer,scoref,scoreb
         if(scorel==scorer==0 and (scoref or scoreb) and mch!="error"):
             tmp = item[current][mch]
             if tmp==0:
@@ -253,14 +260,14 @@ for i in range(0,10):
             current = tmp
         print current
     elif (current!=0 and len(current)==2):
-        print "edge"
+        #print "edge"
         temp=current[0]
         for k in item[temp]:
            if item[temp][k]!=0 and item[temp][k]==current:
                dirr=k
-        print dirr
+        #print dirr
         if dirr==("front" or "back"):
-            print "front or back"
+            #print "front or back"
             if((scoref or scoreb)):
                 if scorel>48:
                     meta2_left="front"
@@ -272,7 +279,7 @@ for i in range(0,10):
                     meta2_right="back"
             flag=1
         elif dirr==("right" or "left"):
-            print "left or right"
+            #print "left or right"
             if (scorer or scorel):
                 if scoref>48:
                     meta2_front="right"
@@ -283,11 +290,11 @@ for i in range(0,10):
                 elif scoreb<12:
                     meta2_back="left"
             flag=2
-        print meta2_front,meta2_back,meta2_right,meta2_left
+        #print meta2_front,meta2_back,meta2_right,meta2_left
         if (scorel==(24 or 12 or 48) and scorer==(24 or 12 or 48) and scoref==(24 or 12 or 48) and scoreb==(24 or 12 or 48) ):
             if (meta2_left==meta2_right and flag==1):
                 #print "mcv loop"
-                print meta2_left
+                #print meta2_left
                 mcv2=meta2_left
                 current=item[current][mcv2]
                 print current
@@ -298,3 +305,4 @@ for i in range(0,10):
                 print current
         else:
             print current
+            
