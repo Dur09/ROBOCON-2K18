@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
-RF24 radio(9,10); // CE, CSN
+RF24 radio(10,9); // CE, CSN
 const byte address[6] = "00001";
 void setup() {
   radio.begin();
