@@ -36,8 +36,8 @@ int laser = A6;                        // Receiver input
 int servo=6;                           // Servo pin
 RF24 radio(10,9);                      // CE, CSN
 NewPing sonar[SONAR_NUM] = {           // Sensor object array.
-  NewPing(2, 5, MAX_DISTANCE),         // Each sensor's trigger pin, echo pin, and max distance to ping. 
-  NewPing(8, 7, MAX_DISTANCE), 
+  NewPing(2, 8, MAX_DISTANCE),         // Each sensor's trigger pin, echo pin, and max distance to ping. 
+  NewPing(5, 7, MAX_DISTANCE), 
 };
 
 // variables
@@ -88,19 +88,19 @@ void openServo()
 
 void loop() 
 {
-    Serial.print("Receiver : ");
-    Serial.println(analogRead(laser));
+//    Serial.print("Receiver : ");
+//    Serial.println(analogRead(laser));
 //    Serial.print("Up Switch : ");
 //    Serial.println(analogRead(tswitch));
 //    Serial.print("Down Switch : ");
 //    Serial.println(analogRead(dswitch));
-//    Serial.print("Up Sonic : ");
-//    Serial.println(sonar[0].ping_cm());
-//    delay(PINGDELAY);
-//    Serial.print("Down Sonic : ");
-//    Serial.println(sonar[1].ping_cm());
-//    Serial.println();
-//    delay(PINGDELAY);
+    Serial.print("Up Sonic : ");
+    Serial.println(sonar[0].ping_cm());
+    delay(PINGDELAY);
+    Serial.print("Down Sonic : ");
+    Serial.println(sonar[1].ping_cm());
+    Serial.println();
+    delay(PINGDELAY);
 //    Serial.print("A0 : ");
 //    Serial.println(analogRead(A0));
 //    Serial.print("A1 : ");
@@ -118,5 +118,5 @@ void loop()
 //    Serial.print("A7 : ");
 //    Serial.println(analogRead(A7));
 //    Serial.println();
-    delay(50);
+    delay(1000);
 }
