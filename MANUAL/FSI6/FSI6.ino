@@ -33,7 +33,7 @@ int s4 = 0;
 int c1 = 13, c2 = 12, c3 = 11, c4 = 8;
 int count = 0;
 const int sizee = 300;
-boolean vals[sizee];
+//boolean vals[sizee];
 boolean preVal = LOW;
 int KP = 3;
 int prev[4];
@@ -67,84 +67,84 @@ void setup()
   pinMode(pins[2], INPUT);
   pinMode(pins[3], INPUT);
 
-  digitalWrite(m12, HIGH);
-  digitalWrite(m22, HIGH);
-  digitalWrite(m32, HIGH);
-  digitalWrite(m42, HIGH);
-
-  delay(1000);
-  digitalWrite(m11, 100);
-  digitalWrite(m21, 100);
-  digitalWrite(m31, 100);
-  digitalWrite(m41, 100);
-  delay(1000);
-  digitalWrite(m11, 0);
-  digitalWrite(m21, 0);
-  digitalWrite(m31, 0);
-  digitalWrite(m41, 0);
-  delay(1000);
-  digitalWrite(m11, 100);
-  digitalWrite(m21, 100);
-  digitalWrite(m31, 100);
-  digitalWrite(m41, 100);
-  delay(1000);
-  while (!done[0] || !done[1] || !done[2] || !done[3])
-  {
-    for (int i = 0; i < 4; i++)
-    {
-      count = 0;
-      preVal = LOW;
-      for (int j = 0; j < sizee; j++)
-      {
-        vals[j] = digitalRead(pins[i]);
-      }
-      for (int j = 0; j < sizee; j++)
-      {
-        if (preVal == LOW && vals[j] == HIGH)
-          count++;
-        preVal = vals[j];
-      }
-
-      prev[i] = temp_pwm[i] - pwm;
-
-      int factor = (count - 20) / KP ;
-      temp_pwm[i] = pwm - factor + prev[i];
-      if (factor == 0)
-      {
-        done[i] = true;
-      }
-      else
-      {
-        done[i] = false;
-      }
-      //      Serial.print(factor);
-      //      Serial.print("-");
-      //      Serial.print(count);
-      //      Serial.print("+");
-      //      Serial.print(prev[i]);
-      //      Serial.print("=");
-      //      Serial.print(temp_pwm[i]);
-      //      Serial.print("|\t");
-      if (temp_pwm[i] > 255)
-        temp_pwm[i] = 255;
-    }
-    //    Serial.println(" ");
-
-    analogWrite(m11, temp_pwm[0]);
-    analogWrite(m21, temp_pwm[1]);
-    analogWrite(m31, temp_pwm[2]);
-    analogWrite(m41, temp_pwm[3]);
-
-    //  Serial.println("------------");
-  }
-  s1 = temp_pwm[0];
-  s2 = temp_pwm[1];
-  s3 = temp_pwm[2];
-  s4 = temp_pwm[3];
-  analogWrite(m11, 0);
-  analogWrite(m21, 0);
-  analogWrite(m31, 0);
-  analogWrite(m41, 0);
+//  digitalWrite(m12, HIGH);
+//  digitalWrite(m22, HIGH);
+//  digitalWrite(m32, HIGH);
+//  digitalWrite(m42, HIGH);
+//
+//  delay(1000);
+//  digitalWrite(m11, 100);
+//  digitalWrite(m21, 100);
+//  digitalWrite(m31, 100);
+//  digitalWrite(m41, 100);
+//  delay(1000);
+//  digitalWrite(m11, 0);
+//  digitalWrite(m21, 0);
+//  digitalWrite(m31, 0);
+//  digitalWrite(m41, 0);
+//  delay(1000);
+//  digitalWrite(m11, 100);
+//  digitalWrite(m21, 100);
+//  digitalWrite(m31, 100);
+//  digitalWrite(m41, 100);
+//  delay(1000);
+//  while (!done[0] || !done[1] || !done[2] || !done[3])
+//  {
+//    for (int i = 0; i < 4; i++)
+//    {
+//      count = 0;
+//      preVal = LOW;
+//      for (int j = 0; j < sizee; j++)
+//      {
+//        vals[j] = digitalRead(pins[i]);
+//      }
+//      for (int j = 0; j < sizee; j++)
+//      {
+//        if (preVal == LOW && vals[j] == HIGH)
+//          count++;
+//        preVal = vals[j];
+//      }
+//
+//      prev[i] = temp_pwm[i] - pwm;
+//
+//      int factor = (count - 20) / KP ;
+//      temp_pwm[i] = pwm - factor + prev[i];
+//      if (factor == 0)
+//      {
+//        done[i] = true;
+//      }
+//      else
+//      {
+//        done[i] = false;
+//      }
+//      //      Serial.print(factor);
+//      //      Serial.print("-");
+//      //      Serial.print(count);
+//      //      Serial.print("+");
+//      //      Serial.print(prev[i]);
+//      //      Serial.print("=");
+//      //      Serial.print(temp_pwm[i]);
+//      //      Serial.print("|\t");
+//      if (temp_pwm[i] > 255)
+//        temp_pwm[i] = 255;
+//    }
+//    //    Serial.println(" ");
+//
+//    analogWrite(m11, temp_pwm[0]);
+//    analogWrite(m21, temp_pwm[1]);
+//    analogWrite(m31, temp_pwm[2]);
+//    analogWrite(m41, temp_pwm[3]);
+//
+//    //  Serial.println("------------");
+//  }
+//  s1 = temp_pwm[0];
+//  s2 = temp_pwm[1];
+//  s3 = temp_pwm[2];
+//  s4 = temp_pwm[3];
+//  analogWrite(m11, 0);
+//  analogWrite(m21, 0);
+//  analogWrite(m31, 0);
+//  analogWrite(m41, 0);
 
   //  Serial.print(s1);
   //  Serial.print(",");
