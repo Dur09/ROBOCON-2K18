@@ -149,25 +149,25 @@ boolean armLoad()
   Serial.println("Load");
 
   // go up
-  digitalWrite(dir, !downValue);
-  analogWrite(pwm, upSpeed);
-  while (!upSwitch());
-  analogWrite(pwm, 0);
+//  digitalWrite(dir, !downValue);
+//  analogWrite(pwm, upSpeed);
+//  while (!upSwitch());
+//  analogWrite(pwm, 0);
   openServo();
-
-  // middle to arm
-  int pos = s2;
-  int a = 2;
-  for (pos = s2; pos >= (s3);)
-  {
-    myservo.write(pos);
-    delay(sp);
-    pos -= a;
-    a += acc;
-  }
-  myservo.write(s3);
-  // grab
-  delay(500);
+//
+//  // middle to arm
+//  int pos = s2;
+//  int a = 2;
+//  for (pos = s2; pos >= (s3);)
+//  {
+//    myservo.write(pos);
+//    delay(sp);
+//    pos -= a;
+//    a += acc;
+//  }
+//  myservo.write(s3);
+//  // grab
+  delay(1000);
   closeServo();
   delay(500);
   openSmallServo();
@@ -177,7 +177,6 @@ boolean armLoad()
   myservo.write(s5);
   delay(1000);
   return true;
-
 }
 
 boolean ballCheck()
@@ -195,20 +194,32 @@ boolean ballCheck()
   return false;
 }
 
-boolean countLoops()
+boolean countLoops(int t)
 {
   Serial.println("Loop");
   count = 0;
   received = true;
   while (1)
   {
-    int r = analogRead(laser3);
-    //    Serial.println(r);
-    if (!received && r < 50)
+    int r;
+    if(t==1)
+    {
+      r = analogRead(laser3);
+    }
+    else if(t==2)
+    {
+      r = analogRead(laser1);
+    }
+    else if(t==3)
+    {
+      r = analogRead(laser2);
+    }
+    //Serial.println(r);
+    if (!received && r < 100)
     {
       received = true;
     }
-    else if (received && r > 400)
+    else if (received && r > 500)
     {
       received = false;
       count++;
@@ -304,10 +315,12 @@ void loop()
       state = rackPick();
     else if (input == 'c')
       state = armLoad();
-    else if (input == 'u')
-      state = ballCheck();
     else if (input == 't')
-      state = countLoops();
+      state = countLoops(1);
+    else if (input == 'u')
+      state = countLoops(2);
+    else if (input == 'v')
+      state = countLoops(3);
     else if (input == 'q')
       state = test();
     Serial.println(state ? "TRUE" : "FALS");
@@ -317,7 +330,7 @@ void loop()
   //  state = ballCheck();
 //    state = rackPick();
 //    state = armLoad();
-//    state = countLoops();
+//    state = countLoops(2);
   //  state = test();
   //  Serial.println(state ? "TRUE" : "FALS");
 }

@@ -25,7 +25,6 @@ void setup() {
   pinMode(3,OUTPUT);
   digitalWrite(3,LOW);
   myservo.attach(6);
-  myservo.write(50);
 }
 
 void loop() 
@@ -40,7 +39,7 @@ void loop()
       delay(100);
       digitalWrite(3,LOW);
       Serial.println("LED");
-      myservo.write(0);
+      myservo.write(120);
     }
     else if(text=='o')
     {
