@@ -64,10 +64,10 @@ void setup()
 
   myservo.attach(servo);
   smallServo.attach(servo2);
-//  myservo.write(-2);
-//  delay(100000);
-//  initial calls
-//  openServo();
+  //  myservo.write(-2);
+  //  delay(100000);
+  //  initial calls
+  //  openServo();
 }
 
 void openServo()
@@ -149,24 +149,24 @@ boolean armLoad()
   Serial.println("Load");
 
   // go up
-//  digitalWrite(dir, !downValue);
-//  analogWrite(pwm, upSpeed);
-//  while (!upSwitch());
-//  analogWrite(pwm, 0);
+  digitalWrite(dir, !downValue);
+  analogWrite(pwm, upSpeed);
+  while (!upSwitch());
+  analogWrite(pwm, 0);
   openServo();
-//
-//  // middle to arm
-//  int pos = s2;
-//  int a = 2;
-//  for (pos = s2; pos >= (s3);)
-//  {
-//    myservo.write(pos);
-//    delay(sp);
-//    pos -= a;
-//    a += acc;
-//  }
-//  myservo.write(s3);
-//  // grab
+
+  // middle to arm
+  int pos = s2;
+  int a = 2;
+  for (pos = s2; pos >= (s3);)
+  {
+    myservo.write(pos);
+    delay(sp);
+    pos -= a;
+    a += acc;
+  }
+  myservo.write(s3);
+  // grab
   delay(1000);
   closeServo();
   delay(500);
@@ -202,15 +202,15 @@ boolean countLoops(int t)
   while (1)
   {
     int r;
-    if(t==1)
+    if (t == 1)
     {
       r = analogRead(laser3);
     }
-    else if(t==2)
+    else if (t == 2)
     {
       r = analogRead(laser1);
     }
-    else if(t==3)
+    else if (t == 3)
     {
       r = analogRead(laser2);
     }
@@ -328,9 +328,9 @@ void loop()
 
   //  if(!state)
   //  state = ballCheck();
-//    state = rackPick();
-//    state = armLoad();
-//    state = countLoops(2);
+  //    state = rackPick();
+  //    state = armLoad();
+  //    state = countLoops(2);
   //  state = test();
   //  Serial.println(state ? "TRUE" : "FALS");
 }
