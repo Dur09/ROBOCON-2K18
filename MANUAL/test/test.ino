@@ -13,22 +13,21 @@
 */
 
 int x1, x2, y1, y2, p1, p2, p3, p4, s, vec;
-int m11 = 9; //FL
-int m12 = A2;
-int m21 = 6; //FR
-int m22 = 7;
-int m31 = 5; //BL
-int m32 = 4;
-int m41 = 10; //BR
-int m42 = A3;
-int m51 = 3;
-int m52 = 2;
-int pwm = 100;
-int s1 = 0;
-int s2 = 0;
-int s3 = 0;
-int s4 = 0;
-int c1 = A0, c2 = A1, c3 = 11, c4 = 8;
+int m11 = 6; //FL
+int m12 = 7;
+int m21 = 10; //FR
+int m22 = 12;
+int m31 = 9; //BL
+int m32 = 13;
+int m41 = 5; //BR
+int m42 = 4;
+int m51 = 11;
+int m52 = 8;
+int s1 = 200;
+int s2 = 200;
+int s3 = 200;
+int s4 = 200;
+int c1 = A2, c2 = A3, c3 = A1, c4 = A0; //Channels ()
 int v1 = 0, v2 = 0, v3 = 0, v4 = 0;
 
 void setup()
@@ -107,28 +106,30 @@ void setup()
   digitalWrite(m42,LOW);
 
   delay(1000);
-  analogWrite(m51, 200);
-  digitalWrite(m52,HIGH);
+//  analogWrite(m51, 200);
+//  digitalWrite(m52,HIGH);
+//  delay(1000);
+//  analogWrite(m51, 0);
+//  digitalWrite(m52,HIGH);
+//  delay(1000);
+//  analogWrite(m51, 200);
+//  digitalWrite(m52,LOW);
+//  delay(1000);
+//  analogWrite(m51, 0);
+//  digitalWrite(m52,LOW);
+  digitalWrite(m51, HIGH);
+  digitalWrite(m52, LOW);
   delay(1000);
-  analogWrite(m51, 0);
-  digitalWrite(m52,HIGH);
+  digitalWrite(m51, LOW);
+  digitalWrite(m52, LOW);
   delay(1000);
-  analogWrite(m51, 200);
-  digitalWrite(m52,LOW);
+  digitalWrite(m51, LOW);
+  digitalWrite(m52, HIGH);
   delay(1000);
-  analogWrite(m51, 0);
-  digitalWrite(m52,LOW);
-  delay(100000);
+  digitalWrite(m51, LOW);
+  digitalWrite(m52, LOW);
 }
 
 void loop()
 {
-  v1 = pulseIn(c1, HIGH);
-  v2 = pulseIn(c2, HIGH);
-  v3 = pulseIn(c3, HIGH);
-  v4 = pulseIn(c4, HIGH);
-  Serial.println(v1);
-  Serial.println(v2);
-  Serial.println(v3);
-  Serial.println(v4);
 }
