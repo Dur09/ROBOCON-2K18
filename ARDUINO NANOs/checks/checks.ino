@@ -1,18 +1,18 @@
 /*
   Writes to :-
-  Up-Down motor
-  Down Servo
-
-  Reads from :-
-  Up-Down switches
-  Laser Receiver
-  Up ultrasonic sensor
-  Down ultrasonic sensor
-
-  Talks with :-
-  Rasberry PI
-  RF Module
-*/
+ Up-Down motor
+ Down Servo
+ 
+ Reads from :-
+ Up-Down switches
+ Laser Receiver
+ Up ultrasonic sensor
+ Down ultrasonic sensor
+ 
+ Talks with :-
+ Rasberry PI
+ RF Module
+ */
 
 // libraries
 #include <NewPing.h>
@@ -23,7 +23,7 @@
 
 // constants
 const byte address[6] = "00001";
-boolean received = true, downValue = true; // down-going value here true=HIGH false=LOW
+boolean received = true, downValue = false; // down-going value here true=HIGH false=LOW
 Servo myservo;
 Servo smallServo;
 #define MAX_DISTANCE 200               // Maximum distance (in cm) to ping.
@@ -31,22 +31,24 @@ Servo smallServo;
 #define PINGDELAY 30
 
 // pins
-int dswitch = A5, tswitch = A7;        // up-down switch
+int dswitch = A6, tswitch = A7;        // up-down switch
 int dir = 4, pwm = 3;                  // up-down motor
-int laser1 = A6, laser2 = A4, laser3 = A2, laser4 = A1;                     // Receiver input
+int laser[]={ A2 ,A0 ,A3 ,A1 };                                                // Receiver input
 int servo = 6, servo2 = 5;                      // Servo pins
 RF24 radio(10, 9);                     // CE, CSN
 NewPing sonar[SONAR_NUM] = {           // Sensor object array.
-  NewPing(2, 8, MAX_DISTANCE),         // Each sensor's trigger pin, echo pin, and max distance to ping.
-  NewPing(5, 7, MAX_DISTANCE),
+  NewPing(7, 8, MAX_DISTANCE),         // Each sensor's trigger pin, echo pin, and max distance to ping.
+  NewPing(5, 2, MAX_DISTANCE),
 };
 
 // variables
-const int s1 = 190, s2 = 55, s3 = -2, s4 = 160, s5 = 90, sms1 = 85, sms2 = 170, sp = 50, acc = 0; // Servo variables
+const int s1 = 200, s2 = 55, s3 = -20, s4 = 150, s5 = 90, sms1 = 35, sms2 = 120, sp = 50, acc = 0; // Servo variables
 int count = 0, tCount = 10, dl = 270;  // Count and releasing delay
 int d0 = 15, d1 = 15;                  // Ultrasonic distances
 int upSpeed = 255, downSpeed = 140;    // motor speed
 boolean state = false;
+int maxi[]={0,0,0};
+int mini[]={1000,1000,1000};
 
 void setup()
 {
@@ -91,22 +93,24 @@ void openServo()
 void loop() 
 {
     Serial.print("Receiver 1 : ");
-    Serial.println(analogRead(laser1));
+    Serial.println(analogRead(laser[0]));
     Serial.print("Receiver 2 : ");
-    Serial.println(analogRead(laser2));
+    Serial.println(analogRead(laser[1]));
     Serial.print("Receiver 3 : ");
-    Serial.println(analogRead(laser3));
-//    Serial.print("Up Switch : ");
-//    Serial.println(analogRead(tswitch));
-//    Serial.print("Down Switch : ");
-//    Serial.println(analogRead(dswitch));
-//    Serial.print("Up Sonic : ");
-//    Serial.println(sonar[0].ping_cm());
-//    delay(PINGDELAY);
-//    Serial.print("Down Sonic : ");
-//    Serial.println(sonar[1].ping_cm());
-//    Serial.println();
-//    delay(PINGDELAY);
+    Serial.println(analogRead(laser[2]));
+    Serial.print("Receiver 4 : ");
+    Serial.println(analogRead(laser[3]));
+    Serial.print("Up Switch : ");
+    Serial.println(analogRead(tswitch));
+    Serial.print("Down Switch : ");
+    Serial.println(analogRead(dswitch));
+    Serial.print("Up Sonic : ");
+    Serial.println(sonar[0].ping_cm());
+    delay(PINGDELAY);
+    Serial.print("Down Sonic : ");
+    Serial.println(sonar[1].ping_cm());
+    Serial.println();
+    delay(PINGDELAY);
 //    Serial.print("A0 : ");
 //    Serial.println(analogRead(A0));
 //    Serial.print("A1 : ");

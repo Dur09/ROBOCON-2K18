@@ -17,5 +17,3 @@ def nano(c) :
 			return False
 		else:
 			print i
-
-#nano('s')

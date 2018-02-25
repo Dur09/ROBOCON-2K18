@@ -4,6 +4,7 @@ import time
 import cPickle as pickle
 from valuesnpins import *
 from readsensor import *
+state=0
 def motor():
 	io.setmode(io.BCM)
 	io.setwarnings(False)
@@ -79,7 +80,11 @@ def calibrate():
 	filer = open('mini', "wb")
 	pickle.dump(mini, filer)
 	filer.close()
+	filer = open('state', "wb")
+	pickle.dump(state, filer)
+	filer.close()
 	time.sleep(1)
 motor()
 calibrate()
 stop()
+

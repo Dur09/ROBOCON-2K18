@@ -20,7 +20,7 @@ static uint8_t ibus[IBUS_BUFFSIZE] = {0};
 // These are my MPU6050 Offset numbers: for mpu.setXGyroOffset()
 // supply your own gyro offsets here, scaled for min sensitivity use MPU6050_calibration.ino <<< download to calibrate your MPU6050 put the values the probram returns below
 //                       XA      YA      ZA      XG      YG      ZG
-int MPUOffsets[6] = { -173,  -2617, 2520,  14,  60,  17};
+int MPUOffsets[6] = {-209,-2616,2521,15,57,18};
 
 
 
@@ -129,16 +129,16 @@ int bias = 0;
 float factor = 1.5, zFactor = 1.0, pFactor = 1.0;
 int origin = 0, setupOrigin = 0;
 int x1, x2, y1, y2, p1, p2, p3, p4, s;
-int m11 = 6; //FL
-int m12 = 7;
-int m21 = 10; //FR
-int m22 = 12;
+int m11 = 10; //FL
+int m12 = 13;
+int m21 = 5; //FR
+int m22 = 4;
 int m31 = 9; //BL
-int m32 = 13;
-int m41 = 5; //BR
-int m42 = 4;
-int m51 = 11;
-int m52 = 8;
+int m32 = 8;
+int m41 = 11; //BR
+int m42 = 12;
+int m51 = 6;
+int m52 = 7;
 int s1 = 255;
 int s2 = 255;
 int s3 = 255;
@@ -428,7 +428,6 @@ void traverse()
   //  Serial.println(v1);
   //  Serial.println(v2);
   //  Serial.println(v3);
-  //  Serial.println(v4);
   if (!v1 == 0 && !v2 == 0 && !v3 == 0 && !v4 == 0)
   {
     int l = v4;
@@ -457,7 +456,6 @@ void traverse()
       digitalWrite(m51, HIGH);
       digitalWrite(m52, HIGH);
     }
-
     //s = sqrt(2);
     /*bias = int(ourYaw * factor);
       p1 = -x1 - y1 / s + bias;
